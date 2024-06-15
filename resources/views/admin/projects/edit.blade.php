@@ -62,13 +62,11 @@
 
         <label for="technologies" class="form-label">Tecnologie utilizzate</label>
         <div class="d-flex gap-2 mb-3">
-
           @foreach($technologies as $technology) 
 
               <div class="form-check" id="technologies">
-                <input @checked( in_array($technology->id, old('technologies',$technology->characters->('id')->all())) )
-                 name="technologies[]" class="form-check-input" type="checkbox" value="{{ $technology->id }}" id="technology-{{$technology->id}}">
-                <label class="form-check-label" for="tag-{{$technology->id}}">
+              <input @checked( in_array($technology->id, old('technologies',$project->technologies->pluck('id')->all())) ) name="technologies[]" class="form-check-input" type="checkbox" value="{{ $technology->id }}" id="technology-{{$technology->id}}">
+                <label class="form-check-label" for="technology-{{$technology->id}}">
                   {{ $technology->name }}
                 </label>
               </div>
