@@ -48,6 +48,11 @@
     </div>
     <div class="container p-4">
       <ul>
+        @if($project->img)
+        <div class="">
+          <img src="{{ asset('storage/' . $project->img) }}" alt="img {{ $project->title }}">
+        </div>
+        @endif
         <li>Tipologia:<br>{{ $project->type ? $project->type->name : 'non specificata' }}</li>
         <li>Link GitHub:<br><a href="{{ $project->repository_link }}">Progetto</a></li>
         <li>Linguaggi:<br>{{ $project->languages }}</li>

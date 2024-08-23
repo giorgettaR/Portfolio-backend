@@ -18,7 +18,7 @@ class Project extends Model
         'languages',
         'softwares',
         'authors',
-        'image_link'
+        'img'
     ];
 
     public function type()

@@ -10,7 +10,7 @@
       <h2 class="fs-2">Modifica il progetto: {{ $project->title}}</h2>
     </div>
     <div class="container">
-      <form action="{{ route('admin.projects.update', $project) }}" method="POST">
+      <form action="{{ route('admin.projects.update', $project) }}" method="POST" enctype="multipart/form-data">
 
         @csrf 
         @method('PUT')
@@ -56,9 +56,10 @@
         </div>
 
         <div class="mb-3">
-          <label for="image_link" class="form-label">Link Immagine</label>
-          <input type="text" name="image_link" class="form-control" id="image_link" placeholder="..." value="{{ old('image_link', $project->image_link) }}">
+          <label for="img" class="form-label">Carica un'immagine</label>
+          <input type="file" name="img" class="form-control" id="img">
         </div>
+
 
         <label for="technologies" class="form-label">Tecnologie utilizzate</label>
         <div class="d-flex gap-2 mb-3">

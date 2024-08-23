@@ -10,6 +10,7 @@ use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
 
 class ProjectController extends Controller
 {
@@ -54,6 +55,14 @@ class ProjectController extends Controller
 
         $form_data['slug'] = $slug;
 
+
+        if ($request->hasFile('img')) {
+
+            $image_path = Storage::disk('public')->put('projects_images', $request->img);
+            $form_data['img'] = $image_path;
+
+        }
+
         $project = Project::create($form_data);
 
         if ($request->has('technologies')){
@@ -89,6 +98,18 @@ class ProjectController extends Controller
     public function update(UpdateProjectRequest $request, Project $project)
     {
         $form_data = $request->all();
+
+        if ($request->hasFile('img')) {
+
+            $image_path = Storage::disk('public')->put('projects_images', $request->img);
+            $form_data['img'] = $image_path;
+
+            if($project->img) {
+                Storage::disk('public')->delete($project->img);
+            }
+
+        }
+
         $project->update($form_data);
 
         $project->technologies()->sync($request->technologies ?? []);
