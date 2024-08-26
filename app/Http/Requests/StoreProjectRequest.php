@@ -30,7 +30,7 @@ class StoreProjectRequest extends FormRequest
             'softwares' => 'required|max:200|string',
             'authors' => 'required|max:200|string',
             'technologies' => 'exists:technologies,id',
-            'img' => 'nullable',
+            'img' => 'nullable|image|max:250',
         ];
     }
 }
